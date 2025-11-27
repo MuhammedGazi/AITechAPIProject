@@ -37,7 +37,7 @@ namespace AITech.API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> EditCategory(UpdateCategoryDto dto)
+        public async Task<IActionResult> Update(UpdateCategoryDto dto)
         {
             await _categoryService.TUpdateAsync(dto);
             return Ok();
