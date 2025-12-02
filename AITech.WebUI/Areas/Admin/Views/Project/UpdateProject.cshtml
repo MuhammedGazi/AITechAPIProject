@@ -1,0 +1,37 @@
+﻿@model UpdateProjectDto
+@{
+    ViewData["Title"] = "UpdateProject";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <h3> Proje Güncelle</h3>
+    <hr />
+
+    <form method="post">
+        <input type="hidden" />
+        <div class="form-group mb-3">
+            <label for="Title">Proje Başlığı</label>
+            <input type="text" class="form-control" id="Title" asp-for="Title" placeholder="Proje başlığını girin" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="ImageUrl">Görsel URL (75x75 için)</label>
+            <input type="text" class="form-control" id="ImageUrl" asp-for="ImageUrl" placeholder="Görselin tam URL'sini girin" />
+            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-4">
+            <label for="CategoryId">Kategori Seçin</label>
+            <select class="form-control" id="CategoryId" asp-for="CategoryId"
+                    asp-items="@ViewBag.categories">
+                <option value="">-- Kategori Seçiniz --</option>
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Projeyi Güncelle</button>
+    </form>
+</div>
+
