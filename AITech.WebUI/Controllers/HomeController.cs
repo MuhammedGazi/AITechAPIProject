@@ -1,20 +1,26 @@
 using AITech.WebUI.Models;
+using AITech.WebUI.Services.GeminiServices;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace AITech.WebUI.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController(IGeminiService _geminiService) : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         public IActionResult Index()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Index(string prompt)
+        {
+            var response=await _geminiService.GetGeminiDataAsync(prompt);
+            if (response is not null)
+            {
+                ViewBag.response=response;
+            }
             return View();
         }
 
