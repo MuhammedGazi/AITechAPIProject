@@ -1,7 +1,4 @@
-﻿using AITech.DataAccess.Repositories.BannerRepositories;
-using AITech.DataAccess.Repositories.CategoryRepositories;
-using AITech.DataAccess.Repositories.ProjectRepositories;
-using AITech.DataAccess.UnitOfWorks;
+﻿using AITech.DataAccess.UnitOfWorks;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AITech.DataAccess.Extensions
@@ -10,11 +7,13 @@ namespace AITech.DataAccess.Extensions
     {
         public static void AddDataAccessServices(this IServiceCollection services)
         {
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddScoped<IProjectRepository, ProjectRepository>();
-            services.AddScoped<IBannerRepository, BannerRepository>();
-
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.Scan(opt => //scrutor otomatik oalrak classları ve ınterfaceleri ekleyecek
+                          opt.FromAssemblyOf<DataAccessAssembly>()
+                          .AddClasses(x => x.Where(t => t.Name.EndsWith("Repository")))
+                          .AsImplementedInterfaces()
+                          .WithScopedLifetime());
         }
     }
 }

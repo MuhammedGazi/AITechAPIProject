@@ -2,8 +2,8 @@
 
 namespace AITech.Entity.Entities
 {
-    public class AboutItem:BaseEntity
+    public class AboutItem : BaseEntity
     {
-        public int Title { get; set; }
+        public string Title { get; set; }
     }
 }

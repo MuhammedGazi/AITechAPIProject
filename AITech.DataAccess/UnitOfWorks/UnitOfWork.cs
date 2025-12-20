@@ -8,7 +8,6 @@ namespace AITech.DataAccess.UnitOfWorks
         public async Task<bool> SaveChangesAsync()
         {
             return await _context.SaveChangesAsync() > 0;
-
         }
     }
 }

@@ -1,7 +1,4 @@
-﻿using AITech.Business.Services.BannerServices;
-using AITech.Business.Services.CategoryServices;
-using AITech.Business.Services.ProjectServices;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace AITech.Business.Extensions
 {
@@ -9,9 +6,11 @@ namespace AITech.Business.Extensions
     {
         public static void AddBusinessServices(this IServiceCollection services)
         {
-            services.AddScoped<ICategoryService, CategoryService>();
-            services.AddScoped<IProjectService, ProjectService>();
-            services.AddScoped<IBannerService, BannerService>();
+            services.Scan(opt => //scrutor ile otomatik tarayıp ekliyor sınıfları ve interfaceleri
+                          opt.FromAssemblyOf<BusinessAssembly>()
+                          .AddClasses(x => x.Where(t => t.Name.EndsWith("Service")))
+                          .AsImplementedInterfaces()
+                          .WithScopedLifetime());
         }
     }
 }
