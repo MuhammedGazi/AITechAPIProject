@@ -1,13 +1,33 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
 <!DOCTYPE html>
 <html lang="en">
 @await Component.InvokeAsync("_AdminHeaderComponent")
+
 <body class="dashboard dashboard_1">
-    @await Component.InvokeAsync("_AdminNavbarComponent")
+
+    <div class="full_container">
+        <div class="inner_container">
+
+            @await Component.InvokeAsync("_AdminSidebarComponent")
+
+            <div id="content">
+
+                @await Component.InvokeAsync("_AdminTopbarComponent")
+
+                <div class="midde_cont">
+                    <div class="container-fluid">
+
+                        @RenderBody()
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     @await Component.InvokeAsync("_AdminScriptComponent")
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -2,7 +2,7 @@
 
 namespace AITech.WebUI.ViewComponents.AdminComponents
 {
-    public class _AdminNavbarComponent : ViewComponent
+    public class _AdminSidebarComponent : ViewComponent
     {
         public IViewComponentResult Invoke()
         {

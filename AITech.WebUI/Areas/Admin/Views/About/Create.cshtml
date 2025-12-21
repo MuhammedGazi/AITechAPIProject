@@ -1,0 +1,629 @@
+﻿@model CreateAboutDto
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="ai-container">
+    <!-- Header -->
+    <div class="ai-page-header">
+        <nav class="ai-breadcrumb">
+            <a asp-action="Index" asp-controller="About">Hakkımızda Yönetimi</a>
+            <span class="ai-breadcrumb-sep">/</span>
+            <span>Yeni Ekle</span>
+        </nav>
+        <h1 class="ai-page-title">
+            <span class="ai-icon-wrapper-sm">
+                <i class="bi bi-plus-circle"></i>
+            </span>
+            Yeni Hakkımızda Ekle
+        </h1>
+        <p class="ai-page-subtitle">Şirketiniz hakkında yeni bilgi ekleyin</p>
+    </div>
+
+    <div class="ai-form-grid">
+        <!-- Main Form -->
+        <div class="ai-form-section">
+            <div class="ai-form-card">
+                <div class="ai-form-card-header">
+                    <h2 class="ai-form-title">
+                        <i class="bi bi-pencil-square"></i>
+                        Bilgi Detayları
+                    </h2>
+                </div>
+
+                <div class="ai-form-card-body">
+                    <form asp-action="Create" asp-controller="About" method="post" class="ai-form">
+                        <!-- Title Field -->
+                        <div class="ai-form-group">
+                            <label asp-for="Title" class="ai-form-label">
+                                Başlık <span class="ai-required">*</span>
+                            </label>
+                            <div class="ai-input-wrapper">
+                                <i class="bi bi-type"></i>
+                                <input asp-for="Title" type="text" class="ai-form-input"
+                                       placeholder="Örn: Misyon, Vizyon, Değerler..."
+                                       required>
+                            </div>
+                            <span asp-validation-for="Title" class="ai-validation-error"></span>
+                            <p class="ai-input-help">
+                                <i class="bi bi-info-circle"></i>
+                                Maksimum 100 karakter
+                            </p>
+                        </div>
+
+                        <!-- Description Field -->
+                        <div class="ai-form-group">
+                            <label asp-for="Description" class="ai-form-label">
+                                Açıklama <span class="ai-required">*</span>
+                            </label>
+                            <div class="ai-input-wrapper ai-textarea-wrapper">
+                                <i class="bi bi-file-text"></i>
+                                <textarea asp-for="Description" class="ai-form-textarea"
+                                          placeholder="Detaylı açıklamayı yazın..."
+                                          rows="5"
+                                          required></textarea>
+                            </div>
+                            <span asp-validation-for="Description" class="ai-validation-error"></span>
+                            <p class="ai-input-help">
+                                <i class="bi bi-info-circle"></i>
+                                Maksimum 500 karakter
+                            </p>
+                        </div>
+
+                        <!-- Image URL Field -->
+                        <div class="ai-form-group">
+                            <label asp-for="ImageUrl" class="ai-form-label">
+                                Resim URL'i <span class="ai-optional">(İsteğe bağlı)</span>
+                            </label>
+                            <div class="ai-input-wrapper">
+                                <i class="bi bi-image"></i>
+                                <input asp-for="ImageUrl" type="url" class="ai-form-input"
+                                       placeholder="https://example.com/image.jpg">
+                            </div>
+                            <span asp-validation-for="ImageUrl" class="ai-validation-error"></span>
+                            <p class="ai-input-help">
+                                <i class="bi bi-info-circle"></i>
+                                Geçerli bir resim URL'i girin
+                            </p>
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="ai-form-actions">
+                            <button type="submit" class="ai-btn ai-btn-primary ai-btn-lg">
+                                <i class="bi bi-check-circle"></i>
+                                <span>Kaydet</span>
+                            </button>
+                            <a asp-action="Index" asp-controller="About" class="ai-btn ai-btn-secondary ai-btn-lg">
+                                <i class="bi bi-x-circle"></i>
+                                <span>İptal</span>
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar Info -->
+        <div class="ai-sidebar">
+            <!-- Tips Card -->
+            <div class="ai-info-card">
+                <div class="ai-info-card-header ai-info-warning">
+                    <i class="bi bi-lightbulb"></i>
+                    <h3>İpuçları</h3>
+                </div>
+                <div class="ai-info-card-body">
+                    <p>Başlık kısmi ve etkileyici olmalıdır. Açıklama alanında detaylı bilgi verin.</p>
+
+                    <div class="ai-example-list">
+                        <div class="ai-example-item">
+                            <i class="bi bi-check-circle"></i>
+                            <span>Misyon Tanısı</span>
+                        </div>
+                        <div class="ai-example-item">
+                            <i class="bi bi-check-circle"></i>
+                            <span>Vizyon Bilgisi</span>
+                        </div>
+                        <div class="ai-example-item">
+                            <i class="bi bi-check-circle"></i>
+                            <span>Temel Değerler</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Card -->
+            <div class="ai-info-card">
+                <div class="ai-info-card-header ai-info-info">
+                    <i class="bi bi-info-circle"></i>
+                    <h3>Bilgi</h3>
+                </div>
+                <div class="ai-info-card-body">
+                    <div class="ai-info-item">
+                        <span class="ai-info-label">Gerekli Alanlar:</span>
+                        <span class="ai-badge ai-badge-danger">Başlık</span>
+                        <span class="ai-badge ai-badge-danger">Açıklama</span>
+                    </div>
+
+                    <hr class="ai-divider">
+
+                    <div class="ai-info-item">
+                        <i class="bi bi-clock"></i>
+                        <span>Tahmini Süre: 3 dakika</span>
+                    </div>
+
+                    <div class="ai-info-item">
+                        <i class="bi bi-star"></i>
+                        <span>Etki: Yüksek</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    :root {
+        --ai-primary: #0066ff;
+        --ai-secondary: #00d9ff;
+        --ai-dark: #0a0e27;
+        --ai-darker: #050810;
+        --ai-light: #f0f4ff;
+        --ai-border: #1a2344;
+        --ai-warning: #ffaa00;
+        --ai-info: #0066ff;
+    }
+
+    .ai-container {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+        margin: -30px -45px -100px -45px;
+        padding: 60px 40px 100px 40px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 30px 30px 0 0;
+    }
+
+        .ai-container::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 102, 255, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(0, 217, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+    @@keyframes fadeInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @@keyframes fadeInRight {
+        from {
+            opacity: 0;
+            transform: translateX(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    /* Page Header */
+    .ai-page-header {
+        margin-bottom: 50px;
+    }
+
+    .ai-breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 20px;
+        font-size: 0.95rem;
+    }
+
+        .ai-breadcrumb a {
+            color: #0066ff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+            .ai-breadcrumb a:hover {
+                color: #00d9ff;
+            }
+
+    .ai-breadcrumb-sep {
+        color: #718096;
+    }
+
+    .ai-breadcrumb span {
+        color: #a0aec0;
+    }
+
+    .ai-page-title {
+        font-size: 3rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #00d9ff 0%, #0066ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin: 0 0 15px 0;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .ai-icon-wrapper-sm {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, #0066ff 0%, #00d9ff 100%);
+        border-radius: 16px;
+        font-size: 2rem;
+        color: white;
+        box-shadow: 0 0 30px rgba(0, 102, 255, 0.3);
+    }
+
+    .ai-page-subtitle {
+        color: #a0aec0;
+        font-size: 1.1rem;
+        margin: 0;
+    }
+
+    /* Form Grid */
+    .ai-form-grid {
+        display: grid;
+        grid-template-columns: 1fr 320px;
+        gap: 40px;
+    }
+
+    /* Form Section */
+    .ai-form-section {
+        animation: fadeInLeft 0.5s ease;
+    }
+
+    .ai-form-card {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid #1a2344;
+        border-radius: 16px;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+    }
+
+    .ai-form-card-header {
+        padding: 28px;
+        border-bottom: 1px solid #1a2344;
+        background: linear-gradient(135deg, rgba(0, 102, 255, 0.1) 0%, transparent 100%);
+    }
+
+    .ai-form-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: white;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .ai-form-card-body {
+        padding: 36px;
+    }
+
+    .ai-form {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+    }
+
+    /* Form Groups */
+    .ai-form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .ai-form-label {
+        color: white;
+        font-weight: 600;
+        margin-bottom: 12px;
+        font-size: 1rem;
+    }
+
+    .ai-required {
+        color: #ff3366;
+    }
+
+    .ai-optional {
+        color: #718096;
+        font-weight: 400;
+        font-size: 0.9rem;
+    }
+
+    .ai-input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .ai-textarea-wrapper {
+        align-items: flex-start;
+    }
+
+    .ai-input-wrapper i {
+        position: absolute;
+        left: 16px;
+        top: 14px;
+        color: #0066ff;
+        font-size: 1.2rem;
+    }
+
+    .ai-form-input {
+        width: 100%;
+        padding: 14px 16px 14px 48px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid #1a2344;
+        border-radius: 12px;
+        color: white;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        font-family: inherit;
+    }
+
+    .ai-form-textarea {
+        width: 100%;
+        padding: 14px 16px 14px 48px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid #1a2344;
+        border-radius: 12px;
+        color: white;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        font-family: inherit;
+        resize: vertical;
+    }
+
+        .ai-form-input:focus,
+        .ai-form-textarea:focus {
+            outline: none;
+            border-color: #0066ff;
+            background: rgba(0, 102, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 102, 255, 0.2);
+        }
+
+        .ai-form-input::placeholder,
+        .ai-form-textarea::placeholder {
+            color: #718096;
+        }
+
+    .ai-validation-error {
+        color: #ff3366;
+        font-size: 0.85rem;
+        margin-top: 8px;
+        display: block;
+    }
+
+    .ai-input-help {
+        color: #718096;
+        font-size: 0.85rem;
+        margin-top: 8px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    /* Form Actions */
+    .ai-form-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 12px;
+    }
+
+    .ai-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 32px;
+        border: none;
+        border-radius: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        font-size: 1rem;
+    }
+
+    .ai-btn-lg {
+        padding: 16px 32px;
+        font-size: 1rem;
+    }
+
+    .ai-btn-primary {
+        background: linear-gradient(135deg, #0066ff 0%, #00d9ff 100%);
+        color: white;
+        box-shadow: 0 0 30px rgba(0, 102, 255, 0.4);
+    }
+
+        .ai-btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 50px rgba(0, 102, 255, 0.6);
+        }
+
+    .ai-btn-secondary {
+        background: rgba(255, 255, 255, 0.1);
+        color: #00d9ff;
+        border: 1px solid #00d9ff;
+    }
+
+        .ai-btn-secondary:hover {
+            background: rgba(0, 217, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+        }
+
+    /* Sidebar */
+    .ai-sidebar {
+        animation: fadeInRight 0.5s ease;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    /* Info Cards */
+    .ai-info-card {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid #1a2344;
+        border-radius: 12px;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+    }
+
+    .ai-info-card-header {
+        padding: 16px 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    .ai-info-warning {
+        background: rgba(255, 170, 0, 0.1);
+        border-bottom: 1px solid rgba(255, 170, 0, 0.2);
+        color: #ffaa00;
+    }
+
+    .ai-info-info {
+        background: rgba(0, 102, 255, 0.1);
+        border-bottom: 1px solid rgba(0, 102, 255, 0.2);
+        color: #0066ff;
+    }
+
+    .ai-info-card-header h3 {
+        margin: 0;
+        font-size: 1rem;
+    }
+
+    .ai-info-card-body {
+        padding: 16px 20px;
+        font-size: 0.9rem;
+        color: #a0aec0;
+    }
+
+    .ai-example-list {
+        margin-top: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .ai-example-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #00ff88;
+    }
+
+        .ai-example-item i {
+            font-size: 0.85rem;
+        }
+
+    .ai-info-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+        flex-wrap: wrap;
+    }
+
+    .ai-divider {
+        border: none;
+        border-top: 1px solid #1a2344;
+        margin: 12px 0;
+    }
+
+    .ai-info-label {
+        font-weight: 600;
+        color: white;
+        display: block;
+        width: 100%;
+        margin-bottom: 6px;
+    }
+
+    .ai-badge {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-right: 4px;
+        margin-bottom: 4px;
+    }
+
+    .ai-badge-danger {
+        background: rgba(255, 51, 102, 0.2);
+        color: #ff3366;
+    }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .ai-container
+
+    {
+        padding: 40px 20px 100px 20px;
+        margin: -30px -20px -100px -20px;
+    }
+
+    .ai-page-title {
+        font-size: 2rem;
+    }
+
+    .ai-icon-wrapper-sm {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+
+    .ai-form-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .ai-form-card-body {
+        padding: 24px;
+    }
+
+    .ai-form-actions {
+        flex-direction: column;
+    }
+
+    .ai-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .ai-btn-lg {
+        width: 100%;
+    }
+
+    }
+</style>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

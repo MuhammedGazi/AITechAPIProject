@@ -1,0 +1,703 @@
+﻿@model List<ResultAboutDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="ai-container">
+    <!-- Header Section -->
+    <div class="ai-header-section">
+        <div class="ai-header-content">
+            <div class="ai-header-left">
+                <h1 class="ai-main-title">
+                    <span class="ai-icon-wrapper">
+                        <i class="bi bi-lightbulb"></i>
+                    </span>
+                    Hakkımızda Yönetimi
+                </h1>
+                <p class="ai-subtitle">Şirketiniz hakkında detaylı bilgiler yönetin</p>
+            </div>
+            <a asp-action="Create" asp-controller="About" class="ai-btn ai-btn-primary">
+                <span class="ai-btn-icon">+</span>
+                <span>Yeni Ekle</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Alert Messages -->
+    @if (TempData["Success"] != null)
+    {
+        <div class="ai-alert ai-alert-success">
+            <i class="bi bi-check-circle"></i>
+            <span>@TempData["Success"]</span>
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="ai-alert ai-alert-error">
+            <i class="bi bi-exclamation-circle"></i>
+            <span>@TempData["Error"]</span>
+        </div>
+    }
+
+    <!-- Search Section -->
+    <div class="ai-search-section">
+        <form method="get" asp-action="Index" asp-controller="About" class="ai-search-form">
+            <div class="ai-search-input-wrapper">
+                <i class="bi bi-search"></i>
+                <input type="text" name="searchTerm" class="ai-search-input"
+                       placeholder="Başlık ile ara..." value="@ViewBag.SearchTerm">
+            </div>
+            <button type="submit" class="ai-btn ai-btn-secondary">
+                Ara
+            </button>
+        </form>
+    </div>
+
+    <!-- Grid Section -->
+    @if (Model != null && Model.Any())
+    {
+        <div class="ai-grid">
+            @foreach (var item in Model)
+            {
+                <div class="ai-grid-item">
+                    <div class="ai-card">
+                        <!-- Card Image -->
+                        <div class="ai-card-image">
+                            @if (!string.IsNullOrEmpty(item.ImageUrl))
+                            {
+                                <img src="@item.ImageUrl" alt="@item.Title" class="ai-card-img">
+                            }
+                            else
+                            {
+                                <div class="ai-card-img-placeholder">
+                                    <i class="bi bi-image"></i>
+                                </div>
+                            }
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="ai-card-body">
+                            <h3 class="ai-card-title">@item.Title</h3>
+                            <p class="ai-card-desc">@(item.Description.Length > 80 ? item.Description.Substring(0, 80) + "..." : item.Description)</p>
+                            <span class="ai-card-id">ID: @item.Id</span>
+                        </div>
+
+                        <!-- Card Footer -->
+                        <div class="ai-card-footer">
+                            <a asp-action="Update" asp-controller="About" asp-route-id="@item.Id" class="ai-card-btn ai-card-btn-edit">
+                                <i class="bi bi-pencil-square"></i>
+                                <span>Düzenle</span>
+                            </a>
+                            <button type="button" class="ai-card-btn ai-card-btn-delete" data-bs-toggle="modal" data-bs-target="#deleteModal@item.Id">
+                                <i class="bi bi-trash"></i>
+                                <span>Sil</span>
+                            </button>
+                        </div>
+
+                        <!-- Card Background Effect -->
+                        <div class="ai-card-glow"></div>
+                    </div>
+                </div>
+
+                <!-- Delete Modal -->
+                <div class="modal fade ai-modal" id="deleteModal@item.Id" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content ai-modal-content">
+                            <div class="ai-modal-header">
+                                <h5 class="ai-modal-title">
+                                    <i class="bi bi-exclamation-triangle"></i>
+                                    Silme Onayı
+                                </h5>
+                                <button type="button" class="ai-modal-close" data-bs-dismiss="modal">
+                                    <i class="bi bi-x"></i>
+                                </button>
+                            </div>
+                            <div class="ai-modal-body">
+                                <p>
+                                    <strong>@item.Title</strong> başlıklı öğeyi silmek istediğinizden emin misiniz?
+                                </p>
+                                <div class="ai-warning-box">
+                                    <i class="bi bi-exclamation-triangle"></i>
+                                    Bu işlem geri alınamaz!
+                                </div>
+                            </div>
+                            <div class="ai-modal-footer">
+                                <button type="button" class="ai-btn ai-btn-secondary" data-bs-dismiss="modal">
+                                    İptal
+                                </button>
+                                <form asp-action="Delete" asp-controller="About" asp-route-id="@item.Id" method="post" style="display:inline;">
+                                    <button type="submit" class="ai-btn ai-btn-danger">
+                                        <i class="bi bi-trash"></i> Sil
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <!-- Empty State -->
+        <div class="ai-empty-state">
+            <div class="ai-empty-icon">
+                <i class="bi bi-inbox"></i>
+            </div>
+            <h3 class="ai-empty-title">Henüz öğe yok</h3>
+            <p class="ai-empty-desc">Başlamak için yeni bir öğe ekleyin</p>
+            <a asp-action="Create" asp-controller="About" class="ai-btn ai-btn-primary">
+                <span class="ai-btn-icon">+</span>
+                <span>İlk Öğeyi Ekle</span>
+            </a>
+        </div>
+    }
+</div>
+
+<style>
+    :root {
+        --ai-primary: #0066ff;
+        --ai-secondary: #00d9ff;
+        --ai-dark: #0a0e27;
+        --ai-darker: #050810;
+        --ai-light: #f0f4ff;
+        --ai-border: #1a2344;
+        --ai-success: #00ff88;
+        --ai-danger: #ff3366;
+        --ai-warning: #ffaa00;
+    }
+
+    .ai-container {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+        margin: -30px -45px -100px -45px;
+        padding: 60px 40px 100px 40px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 30px 30px 0 0;
+    }
+
+        .ai-container::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 102, 255, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(0, 217, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+    @@keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @@keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @@keyframes fadeInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @@keyframes fadeInRight {
+        from {
+            opacity: 0;
+            transform: translateX(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @@keyframes glow {
+        0%, 100% {
+            box-shadow: 0 0 30px rgba(0, 102, 255, 0.4);
+        }
+
+        50% {
+            box-shadow: 0 0 60px rgba(0, 102, 255, 0.6);
+        }
+    }
+
+    /* Header Section */
+    .ai-header-section {
+        margin-bottom: 60px;
+    }
+
+    .ai-header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 40px;
+    }
+
+    .ai-header-left {
+        flex: 1;
+    }
+
+    .ai-main-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #00d9ff 0%, #0066ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin: 0 0 20px 0;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .ai-icon-wrapper {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #0066ff 0%, #00d9ff 100%);
+        border-radius: 20px;
+        font-size: 2.5rem;
+        color: white;
+        box-shadow: 0 0 40px rgba(0, 102, 255, 0.4);
+    }
+
+    .ai-subtitle {
+        font-size: 1.1rem;
+        color: #a0aec0;
+        margin: 0;
+    }
+
+    /* Buttons */
+    .ai-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 32px;
+        border: none;
+        border-radius: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        font-size: 1rem;
+    }
+
+    .ai-btn-primary {
+        background: linear-gradient(135deg, #0066ff 0%, #00d9ff 100%);
+        color: white;
+        box-shadow: 0 0 30px rgba(0, 102, 255, 0.4);
+    }
+
+        .ai-btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 50px rgba(0, 102, 255, 0.6);
+        }
+
+    .ai-btn-secondary {
+        background: rgba(255, 255, 255, 0.1);
+        color: #00d9ff;
+        border: 1px solid #00d9ff;
+    }
+
+        .ai-btn-secondary:hover {
+            background: rgba(0, 217, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+        }
+
+    .ai-btn-danger {
+        background: #ff3366;
+        color: white;
+    }
+
+        .ai-btn-danger:hover {
+            background: #ff1a52;
+            box-shadow: 0 0 20px rgba(255, 51, 102, 0.4);
+        }
+
+    .ai-btn-icon {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    /* Alerts */
+    .ai-alert {
+        padding: 16px 24px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 500;
+        animation: slideDown 0.3s ease;
+    }
+
+    .ai-alert-success {
+        background: rgba(0, 255, 136, 0.15);
+        color: #00ff88;
+        border: 1px solid rgba(0, 255, 136, 0.3);
+    }
+
+    .ai-alert-error {
+        background: rgba(255, 51, 102, 0.15);
+        color: #ff3366;
+        border: 1px solid rgba(255, 51, 102, 0.3);
+    }
+
+    /* Search Section */
+    .ai-search-section {
+        margin-bottom: 60px;
+    }
+
+    .ai-search-form {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+    }
+
+    .ai-search-input-wrapper {
+        flex: 1;
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+        .ai-search-input-wrapper i {
+            position: absolute;
+            left: 16px;
+            color: #a0aec0;
+            font-size: 1.2rem;
+        }
+
+    .ai-search-input {
+        width: 100%;
+        padding: 14px 16px 14px 48px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid #1a2344;
+        border-radius: 12px;
+        color: white;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+        .ai-search-input:focus {
+            outline: none;
+            border-color: #0066ff;
+            background: rgba(0, 102, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 102, 255, 0.2);
+        }
+
+        .ai-search-input::placeholder {
+            color: #718096;
+        }
+
+    /* Grid */
+    .ai-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 32px;
+        margin-bottom: 40px;
+    }
+
+    .ai-grid-item {
+        animation: fadeInUp 0.5s ease forwards;
+    }
+
+    /* Cards */
+    .ai-card {
+        position: relative;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid #1a2344;
+        border-radius: 16px;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+        .ai-card:hover {
+            border-color: #0066ff;
+            transform: translateY(-12px);
+            box-shadow: 0 20px 60px rgba(0, 102, 255, 0.2);
+        }
+
+    .ai-card-glow {
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle, rgba(0, 102, 255, 0.1) 0%, transparent 70%);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        pointer-events: none;
+    }
+
+    .ai-card:hover .ai-card-glow {
+        opacity: 1;
+    }
+
+    .ai-card-image {
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+        background: rgba(0, 102, 255, 0.05);
+        border-bottom: 1px solid #1a2344;
+    }
+
+    .ai-card-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .ai-card-img-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, rgba(0, 102, 255, 0.1) 0%, rgba(0, 217, 255, 0.05) 100%);
+        font-size: 3rem;
+        color: #0066ff;
+    }
+
+    .ai-card-body {
+        padding: 24px;
+        flex: 1;
+    }
+
+    .ai-card-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: white;
+        margin: 0 0 12px 0;
+    }
+
+    .ai-card-desc {
+        color: #a0aec0;
+        margin: 0 0 16px 0;
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+
+    .ai-card-id {
+        background: rgba(0, 217, 255, 0.15);
+        color: #00d9ff;
+        padding: 6px 14px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        display: inline-block;
+    }
+
+    .ai-card-footer {
+        display: flex;
+        gap: 12px;
+        padding: 16px 24px 24px;
+    }
+
+    .ai-card-btn {
+        flex: 1;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 0.9rem;
+        text-decoration: none;
+    }
+
+    .ai-card-btn-edit {
+        background: rgba(0, 102, 255, 0.2);
+        color: #0066ff;
+        border: 1px solid rgba(0, 102, 255, 0.3);
+    }
+
+        .ai-card-btn-edit:hover {
+            background: rgba(0, 102, 255, 0.3);
+            box-shadow: 0 0 15px rgba(0, 102, 255, 0.3);
+        }
+
+    .ai-card-btn-delete {
+        background: rgba(255, 51, 102, 0.2);
+        color: #ff3366;
+        border: 1px solid rgba(255, 51, 102, 0.3);
+    }
+
+        .ai-card-btn-delete:hover {
+            background: rgba(255, 51, 102, 0.3);
+            box-shadow: 0 0 15px rgba(255, 51, 102, 0.3);
+        }
+
+    /* Empty State */
+    .ai-empty-state {
+        text-align: center;
+        padding: 80px 40px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px dashed #1a2344;
+        border-radius: 16px;
+    }
+
+    .ai-empty-icon {
+        font-size: 4rem;
+        color: #0066ff;
+        margin-bottom: 20px;
+        opacity: 0.5;
+    }
+
+    .ai-empty-title {
+        font-size: 1.8rem;
+        color: white;
+        margin: 0 0 12px 0;
+    }
+
+    .ai-empty-desc {
+        color: #a0aec0;
+        margin: 0 0 30px 0;
+        font-size: 1.05rem;
+    }
+
+    /* Modal */
+    .ai-modal .modal-content {
+        background: rgba(10, 14, 39, 0.95);
+        border: 1px solid #1a2344;
+        border-radius: 16px;
+        backdrop-filter: blur(10px);
+    }
+
+    .ai-modal-header {
+        border-bottom: 1px solid #1a2344;
+        padding: 24px;
+    }
+
+    .ai-modal-title {
+        color: white;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 0;
+    }
+
+    .ai-modal-close {
+        background: none;
+        border: none;
+        color: #a0aec0;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+
+        .ai-modal-close:hover {
+            color: #ff3366;
+        }
+
+    .ai-modal-body {
+        padding: 24px;
+        color: #a0aec0;
+    }
+
+        .ai-modal-body p {
+            margin-bottom: 16px;
+        }
+
+    .ai-warning-box {
+        background: rgba(255, 170, 0, 0.15);
+        border: 1px solid rgba(255, 170, 0, 0.3);
+        color: #ffaa00;
+        padding: 16px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 600;
+    }
+
+    .ai-modal-footer {
+        border-top: 1px solid #1a2344;
+        padding: 24px;
+        display: flex;
+        gap: 12px;
+        justify-content: flex-end;
+    }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .ai-container
+
+    {
+        padding: 40px 20px 100px 20px;
+        margin: -30px -20px -100px -20px;
+    }
+
+    .ai-header-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .ai-main-title {
+        font-size: 2rem;
+    }
+
+    .ai-icon-wrapper {
+        width: 60px;
+        height: 60px;
+        font-size: 1.8rem;
+    }
+
+    .ai-search-form {
+        flex-direction: column;
+    }
+
+    .ai-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ai-header-left {
+        width: 100%;
+    }
+
+    }
+</style>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+}
+
