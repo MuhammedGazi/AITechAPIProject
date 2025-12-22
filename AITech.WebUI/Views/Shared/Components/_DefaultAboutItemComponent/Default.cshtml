@@ -1,0 +1,26 @@
+﻿@model List<ResultAboutItemDto>
+@*
+    _DefaultAboutItemComponent
+*@
+
+<div class="row g-3">
+    <div class="col-sm-6">
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var item in Model.Take(2))
+            {
+                <h6 class="mb-3"><i class="fa fa-check text-primary me-2"></i>@item.Title</h6>
+            }
+        }
+    </div>
+
+    <div class="col-sm-6">
+        @if (Model != null && Model.Count > 2)
+        {
+            @foreach (var item in Model.Skip(2).Take(2))
+            {
+                <h6 class="mb-3"><i class="fa fa-check text-primary me-2"></i>@item.Title</h6>
+            }
+        }
+    </div>
+</div>

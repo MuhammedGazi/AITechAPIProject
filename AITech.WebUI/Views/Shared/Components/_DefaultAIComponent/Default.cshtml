@@ -1,0 +1,86 @@
+﻿@*
+    _DefaultAIComponent.cshtml
+*@
+
+<div class="container-fluid bg-primary newsletter py-5" id="ai-section">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-md-5 ps-lg-0 pt-5 pt-md-0 text-start wow fadeIn" data-wow-delay="0.3s">
+                <img class="img-fluid" src="~/AI-html-1.0.0/img/newsletter.png" alt="">
+            </div>
+
+            <div class="col-md-7 py-5 newsletter-text wow fadeIn" data-wow-delay="0.5s">
+                <div class="btn btn-sm border rounded-pill text-white px-3 mb-3">Yapay Zeka Asistanı</div>
+                <h1 class="text-white mb-4">Aklınızdakini Gemini'ye Sorun</h1>
+
+                <form onsubmit="return false;">
+                    <div class="position-relative w-100 mt-3 mb-2">
+                        <input id="txtPrompt"
+                               class="form-control border-0 rounded-pill w-100 ps-4 pe-5"
+                               type="text"
+                               placeholder="Sorunuzu buraya yazın..."
+                               style="height: 48px;" required>
+
+                        <button type="button" onclick="sendToGemini()" class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2">
+                            <i class="fa fa-paper-plane text-primary fs-4"></i>
+                        </button>
+                    </div>
+                </form>
+                <small class="text-white-50">Yapay zeka teknolojisi ile anında cevap alın.</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="resultModalLabel"><i class="fa fa-robot me-2"></i>Gemini Cevabı</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body" id="modalContent" style="white-space: pre-line; max-height: 60vh; overflow-y: auto;">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    function sendToGemini() {
+        var promptText = $("#txtPrompt").val();
+
+        if (!promptText.trim()) {
+            alert("Lütfen bir soru yazın!");
+            return;
+        }
+
+        $("#modalContent").html('<div class="text-center p-4"><div class="spinner-border text-primary" role="status"></div><p class="mt-2">Gemini düşünüyor...</p></div>');
+        var myModal = new bootstrap.Modal(document.getElementById('resultModal'));
+        myModal.show();
+
+        $.ajax({
+            type: "POST",
+            url: "/Default/AIGet", 
+            data: { prompt: promptText }, 
+            success: function (response) {
+                $("#modalContent").text(response);
+
+                $("#txtPrompt").val("");
+            },
+            error: function () {
+                $("#modalContent").text("Bir hata oluştu. Lütfen tekrar deneyin.");
+            }
+        });
+    }
+
+    $("#txtPrompt").keypress(function(event) {
+        if (event.keyCode === 13) {
+            sendToGemini();
+        }
+    });
+</script>

@@ -1,0 +1,58 @@
+﻿@model List<ResultTestimonialDto>
+@*
+     _DefaultTestimonialComponent
+*@
+
+<div class="container-xxl py-5">
+    <div class="container py-5">
+        <div class="row g-5">
+            <div class="col-lg-5 wow fadeIn" data-wow-delay="0.1s">
+                <div class="btn btn-sm border rounded-pill text-primary px-3 mb-3">Referanslar</div>
+                <h1 class="mb-4">Müşterilerimiz Ne Diyor?</h1>
+                <p class="mb-4">
+                    Müşteri memnuniyeti bizim en büyük önceliğimizdir. Yapay zeka çözümlerimizle işlerini büyüten
+                    iş ortaklarımızın ve müşterilerimizin değerli yorumlarını buradan inceleyebilirsiniz.
+                    Siz de mutlu müşterilerimiz arasına katılın.
+                </p>
+                <a class="btn btn-primary rounded-pill px-4" href="">Tümünü Gör</a>
+            </div>
+
+            <div class="col-lg-7 wow fadeIn" data-wow-delay="0.5s">
+                <div class="owl-carousel testimonial-carousel border-start border-primary">
+                    
+                    @if (Model != null && Model.Any())
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <div class="testimonial-item ps-5">
+                                <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                                
+                                <p class="fs-4">
+                                    @item.Comment
+                                </p>
+                                
+                                <div class="d-flex align-items-center">
+                                    <img class="img-fluid flex-shrink-0 rounded-circle" 
+                                         src="@item.ImageUrl"
+                                         style="width: 60px; height: 60px;" alt="@item.Name">
+                                    
+                                    <div class="ps-3">
+                                        <h5 class="mb-1">@item.Name</h5>
+                                        <span>@item.Title</span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="testimonial-item ps-5">
+                            <p class="fs-4">Henüz bir müşteri yorumu eklenmemiştir.</p>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

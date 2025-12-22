@@ -1,0 +1,71 @@
+﻿@model List<ResultFAQDto>
+@*
+    _DefaultFAQComponent
+*@
+@{
+    int count = Model.Count;
+    int half = (count + 1) / 2;
+    int delayCounter = 1;
+}
+
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 500px;">
+            <div class="btn btn-sm border rounded-pill text-primary px-3 mb-3">Sıkça Sorulan Sorular</div>
+            <h1 class="mb-4">Merak Ettikleriniz ve Cevapları</h1>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="accordion" id="accordionFAQ1">
+                    @if (Model != null && Model.Any())
+                    {
+                        @foreach (var item in Model.Take(half))
+                        {
+                            <div class="accordion-item wow fadeIn" data-wow-delay="@(0.1 * delayCounter)s">
+                                <h2 class="accordion-header" id="heading_@item.Id">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapse_@item.Id" aria-expanded="false" aria-controls="collapse_@item.Id">
+                                        @item.Question
+                                    </button>
+                                </h2>
+                                <div id="collapse_@item.Id" class="accordion-collapse collapse" aria-labelledby="heading_@item.Id"
+                                     data-bs-parent="#accordionFAQ1">
+                                    <div class="accordion-body">
+                                        @item.Answer
+                                    </div>
+                                </div>
+                            </div>
+                            delayCounter++;
+                        }
+                    }
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="accordion" id="accordionFAQ2">
+                    @if (Model != null && Model.Count > 1)
+                    {
+                        @foreach (var item in Model.Skip(half))
+                        {
+                            <div class="accordion-item wow fadeIn" data-wow-delay="@(0.1 * delayCounter)s">
+                                <h2 class="accordion-header" id="heading_@item.Id">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapse_@item.Id" aria-expanded="false" aria-controls="collapse_@item.Id">
+                                        @item.Question
+                                    </button>
+                                </h2>
+                                <div id="collapse_@item.Id" class="accordion-collapse collapse" aria-labelledby="heading_@item.Id"
+                                     data-bs-parent="#accordionFAQ2">
+                                    <div class="accordion-body">
+                                        @item.Answer
+                                    </div>
+                                </div>
+                            </div>
+                            delayCounter++;
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

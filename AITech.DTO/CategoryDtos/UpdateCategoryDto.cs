@@ -1,4 +1,4 @@
 ﻿namespace AITech.DTO.CategoryDtos
 {
-    public record UpdateCategoryDto(int Id, string? Name);
+    public record UpdateCategoryDto(int Id, string? Name, string? Description);
 }

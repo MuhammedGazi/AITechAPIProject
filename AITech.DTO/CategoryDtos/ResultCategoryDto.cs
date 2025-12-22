@@ -1,4 +1,4 @@
 ﻿namespace AITech.DTO.CategoryDtos
 {
-    public record ResultCategoryDto(int Id, string Name);
+    public record ResultCategoryDto(int Id, string Name, string Description);
 }

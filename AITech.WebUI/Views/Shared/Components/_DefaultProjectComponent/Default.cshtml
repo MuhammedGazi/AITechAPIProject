@@ -1,0 +1,115 @@
+﻿@model List<ResultProjectDto>
+
+@*
+    _DefaultProjectComponent
+*@
+<style>
+    .project-carousel .owl-nav {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        transform: translateY(-50%);
+        display: flex;
+        justify-content: space-between;
+        left: 0;
+        pointer-events: none;
+        z-index: 10;
+    }
+
+        .project-carousel .owl-nav .owl-prev,
+        .project-carousel .owl-nav .owl-next {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            background: var(--bs-primary); 
+            border-radius: 50%; 
+            font-size: 20px;
+            transition: .5s;
+            pointer-events: auto; 
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin: 0 10px; 
+        }
+
+            .project-carousel .owl-nav .owl-prev:hover,
+            .project-carousel .owl-nav .owl-next:hover {
+                background: #0d6efd;
+                color: #fff;
+            }
+
+   
+    :root {
+        --bs-primary: #007bff;
+    }
+</style>
+
+<div class="container-fluid bg-light py-5">
+    <div class="container py-5">
+        <div class="mx-auto text-center wow fadeIn" data-wow-delay="0.1s" style="max-width: 500px;">
+            <div class="btn btn-sm border rounded-pill text-primary px-3 mb-3">Projelerimiz</div>
+            <h1 class="mb-4">Son Yapay Zeka Çalışmalarımızı İnceleyin</h1>
+        </div>
+
+        <div class="project-carousel owl-carousel wow fadeIn" data-wow-delay="0.3s">
+            
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var item in Model)
+                {
+                   
+                    <div class="case-item position-relative overflow-hidden rounded mb-2">
+                        <img class="img-fluid" src="@item.ImageUrl" alt="@item.Title" style="width:100%; height:auto;">
+                        <a class="case-overlay text-decoration-none" href="">
+                            <small>@(item.Category?.Name ?? "Genel")</small>
+                            <h5 class="lh-base text-white mb-3">
+                                @item.Title
+                            </h5>
+                            <span class="btn btn-square btn-primary"><i class="fa fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+  
+    window.addEventListener('load', function() {
+       
+        if (typeof $ !== 'undefined') {
+             $(".project-carousel").owlCarousel({
+                autoplay: true,
+                smartSpeed: 1000,
+                margin: 25,
+                loop: true,
+                center: true, 
+                dots: false,
+                nav: true,
+                navText : [
+                    '<i class="bi bi-chevron-left"></i>',
+                    '<i class="bi bi-chevron-right"></i>'
+                ],
+                responsive: {
+                    0:{
+                        items:1
+                    },
+                    576:{
+                        items:1
+                    },
+                    768:{
+                        items:2
+                    },
+                    992:{
+                        items:3
+                    }
+                }
+            });
+        } else {
+            console.error("jQuery yüklenmediği için Slider çalışmadı!");
+        }
+    });
+</script>

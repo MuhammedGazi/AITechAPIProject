@@ -2,7 +2,6 @@ using AITech.WebUI.Models;
 using AITech.WebUI.Services.GeminiServices;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using System.Threading.Tasks;
 
 namespace AITech.WebUI.Controllers
 {
@@ -16,10 +15,10 @@ namespace AITech.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(string prompt)
         {
-            var response=await _geminiService.GetGeminiDataAsync(prompt);
+            var response = await _geminiService.GetGeminiDataAsync(prompt);
             if (response is not null)
             {
-                ViewBag.response=response;
+                ViewBag.response = response;
             }
             return View();
         }
