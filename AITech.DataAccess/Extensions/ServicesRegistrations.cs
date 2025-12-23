@@ -1,4 +1,6 @@
-﻿using AITech.DataAccess.UnitOfWorks;
+﻿using AITech.DataAccess.Context;
+using AITech.DataAccess.UnitOfWorks;
+using AITech.Entity.Entities;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AITech.DataAccess.Extensions
@@ -14,6 +16,11 @@ namespace AITech.DataAccess.Extensions
                           .AddClasses(x => x.Where(t => t.Name.EndsWith("Repository")))
                           .AsImplementedInterfaces()
                           .WithScopedLifetime());
+
+            services.AddIdentity<AppUser, AppRole>(config =>
+            {
+                config.User.RequireUniqueEmail = true;
+            }).AddEntityFrameworkStores<AppDbContext>();
         }
     }
 }

@@ -4,5 +4,616 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+<div class="ai-container">
+    <div class="ai-header">
+        <div class="ai-header-content">
+            <div class="ai-icon-wrapper">
+                <svg class="ai-header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke-width="2"/>
+                    <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke-width="2"/>
+                </svg>
+            </div>
+            <div>
+                <h1 class="ai-title">Sosyal Medya Düzenle</h1>
+                <p class="ai-subtitle">Sosyal medya hesap bilgilerini güncelleyin</p>
+            </div>
+        </div>
+        <a asp-action="Index" asp-controller="Social" class="ai-btn-secondary">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M10 19l-7-7m0 0l7-7m-7 7h18" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Geri Dön
+        </a>
+    </div>
 
+    <div class="ai-form-container">
+        <form asp-action="Update" asp-controller="Social" method="post" class="ai-form">
+            <input type="hidden" asp-for="Id" />
+            
+            <div class="ai-form-grid">
+                <div class="ai-form-group full-width">
+                    <label asp-for="Name" class="ai-label">
+                        <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" stroke-width="2"/>
+                        </svg>
+                        Platform Adı
+                    </label>
+                    <input asp-for="Name" class="ai-input" placeholder="Örn: Facebook, Twitter, Instagram" />
+                    <span asp-validation-for="Name" class="ai-error"></span>
+                </div>
+
+                <div class="ai-form-group full-width">
+                    <label asp-for="Icon" class="ai-label">
+                        <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="2"/>
+                        </svg>
+                        İkon Sınıfı
+                    </label>
+                    <input asp-for="Icon" class="ai-input" placeholder="Örn: fab fa-facebook, fab fa-twitter" id="iconInput" />
+                    <span asp-validation-for="Icon" class="ai-error"></span>
+                    <div class="ai-hint">
+                        <svg class="hint-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="2"/>
+                        </svg>
+                        Font Awesome ikon sınıfını girin (Örn: fab fa-facebook)
+                    </div>
+                </div>
+
+                <div class="ai-form-group full-width">
+                    <label class="ai-label">
+                        <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M4 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1h-4a1 1 0 01-1-1V5z" stroke-width="2"/>
+                        </svg>
+                        Popüler İkonlar
+                    </label>
+                    <div class="icon-selector">
+                        <button type="button" class="icon-option" data-icon="fab fa-facebook">
+                            <i class="fab fa-facebook"></i>
+                            <span>Facebook</span>
+                        </button>
+                        <button type="button" class="icon-option" data-icon="fab fa-twitter">
+                            <i class="fab fa-twitter"></i>
+                            <span>Twitter</span>
+                        </button>
+                        <button type="button" class="icon-option" data-icon="fab fa-instagram">
+                            <i class="fab fa-instagram"></i>
+                            <span>Instagram</span>
+                        </button>
+                        <button type="button" class="icon-option" data-icon="fab fa-linkedin">
+                            <i class="fab fa-linkedin"></i>
+                            <span>LinkedIn</span>
+                        </button>
+                        <button type="button" class="icon-option" data-icon="fab fa-youtube">
+                            <i class="fab fa-youtube"></i>
+                            <span>YouTube</span>
+                        </button>
+                        <button type="button" class="icon-option" data-icon="fab fa-tiktok">
+                            <i class="fab fa-tiktok"></i>
+                            <span>TikTok</span>
+                        </button>
+                        <button type="button" class="icon-option" data-icon="fab fa-github">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                        </button>
+                        <button type="button" class="icon-option" data-icon="fab fa-pinterest">
+                            <i class="fab fa-pinterest"></i>
+                            <span>Pinterest</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="ai-form-group full-width">
+                    <label asp-for="Url" class="ai-label">
+                        <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" stroke-width="2"/>
+                        </svg>
+                        Profil URL
+                    </label>
+                    <input asp-for="Url" class="ai-input" placeholder="https://facebook.com/yourpage" />
+                    <span asp-validation-for="Url" class="ai-error"></span>
+                    <div class="ai-hint">
+                        <svg class="hint-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="2"/>
+                        </svg>
+                        Sosyal medya profilinizin tam URL adresini girin
+                    </div>
+                </div>
+            </div>
+
+            <div class="ai-form-actions">
+                <button type="submit" class="ai-btn-submit">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M5 13l4 4L19 7" stroke-width="2.5"/>
+                    </svg>
+                    Değişiklikleri Kaydet
+                </button>
+                <a asp-action="Index" asp-controller="Social" class="ai-btn-cancel">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M6 18L18 6M6 6l12 12" stroke-width="2"/>
+                    </svg>
+                    İptal
+                </a>
+            </div>
+        </form>
+
+        <div class="ai-preview-card">
+            <div class="preview-header">
+                <svg class="preview-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-width="2"/>
+                    <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-width="2"/>
+                </svg>
+                <h3>Ön İzleme</h3>
+            </div>
+            <div class="preview-content">
+                <div class="preview-social">
+                    <div class="preview-icon-wrapper" id="previewIconWrapper">
+                        <i class="fab fa-globe preview-icon-display" id="previewIcon"></i>
+                    </div>
+                    <h3 class="preview-name" id="previewName">Platform Adı</h3>
+                    <div class="preview-url">
+                        <svg class="url-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" stroke-width="2"/>
+                        </svg>
+                        <span id="previewUrl">URL burada görünecek</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .ai-container {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+        margin: -30px -45px -100px -45px;
+        padding: 60px 40px 100px 40px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 30px 30px 0 0;
+    }
+
+    .ai-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: 
+            radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+        animation: pulse 8s ease-in-out infinite;
+        pointer-events: none;
+    }
+
+    @@keyframes pulse {
+        0%, 100% { opacity: 0.5; transform: scale(1); }
+        50% { opacity: 0.8; transform: scale(1.1); }
+    }
+
+    .ai-header {
+        position: relative;
+        z-index: 10;
+        margin-bottom: 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .ai-header-content {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .ai-icon-wrapper {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
+    }
+
+    .ai-header-icon {
+        width: 36px;
+        height: 36px;
+        color: white;
+    }
+
+    .ai-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin: 0;
+    }
+
+    .ai-subtitle {
+        color: rgba(255, 255, 255, 0.6);
+        margin: 5px 0 0 0;
+        font-size: 1rem;
+    }
+
+    .ai-btn-secondary {
+        background: rgba(59, 130, 246, 0.1);
+        border: 2px solid rgba(59, 130, 246, 0.3);
+        padding: 14px 28px;
+        border-radius: 12px;
+        color: #3b82f6;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .ai-btn-secondary:hover {
+        background: rgba(59, 130, 246, 0.2);
+        border-color: rgba(59, 130, 246, 0.5);
+        transform: translateY(-2px);
+        color: #3b82f6;
+    }
+
+    .btn-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .ai-form-container {
+        display: grid;
+        grid-template-columns: 1fr 400px;
+        gap: 30px;
+        position: relative;
+        z-index: 10;
+    }
+
+    .ai-form {
+        background: rgba(26, 31, 58, 0.6);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(59, 130, 246, 0.2);
+        border-radius: 20px;
+        padding: 40px;
+    }
+
+    .ai-form-grid {
+        display: grid;
+        gap: 25px;
+    }
+
+    .ai-form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .full-width {
+        grid-column: 1 / -1;
+    }
+
+    .ai-label {
+        color: white;
+        font-weight: 600;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .label-icon {
+        width: 20px;
+        height: 20px;
+        color: #3b82f6;
+    }
+
+    .ai-input {
+        background: rgba(10, 14, 39, 0.6);
+        border: 2px solid rgba(59, 130, 246, 0.2);
+        border-radius: 12px;
+        padding: 14px 18px;
+        color: white;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        font-family: inherit;
+    }
+
+    .ai-input:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        background: rgba(10, 14, 39, 0.8);
+    }
+
+    .ai-input::placeholder {
+        color: rgba(255, 255, 255, 0.3);
+    }
+
+    .ai-error {
+        color: #ef4444;
+        font-size: 0.875rem;
+        margin-top: -5px;
+    }
+
+    .ai-hint {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.875rem;
+    }
+
+    .hint-icon {
+        width: 16px;
+        height: 16px;
+    }
+
+    .icon-selector {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 12px;
+    }
+
+    .icon-option {
+        background: rgba(10, 14, 39, 0.6);
+        border: 2px solid rgba(59, 130, 246, 0.2);
+        border-radius: 12px;
+        padding: 16px 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: white;
+        font-size: 0.875rem;
+        font-weight: 500;
+    }
+
+    .icon-option i {
+        font-size: 2rem;
+        color: #3b82f6;
+    }
+
+    .icon-option:hover {
+        border-color: #3b82f6;
+        background: rgba(59, 130, 246, 0.1);
+        transform: translateY(-2px);
+    }
+
+    .icon-option.active {
+        border-color: #3b82f6;
+        background: rgba(59, 130, 246, 0.2);
+        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+    }
+
+    .ai-form-actions {
+        display: flex;
+        gap: 15px;
+        margin-top: 30px;
+    }
+
+    .ai-btn-submit, .ai-btn-cancel {
+        flex: 1;
+        padding: 16px 32px;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 1rem;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        text-decoration: none;
+    }
+
+    .ai-btn-submit {
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+        color: white;
+    }
+
+    .ai-btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+    }
+
+    .ai-btn-cancel {
+        background: rgba(239, 68, 68, 0.1);
+        border: 2px solid rgba(239, 68, 68, 0.3);
+        color: #ef4444;
+    }
+
+    .ai-btn-cancel:hover {
+        background: rgba(239, 68, 68, 0.2);
+        border-color: rgba(239, 68, 68, 0.5);
+        transform: translateY(-2px);
+    }
+
+    .ai-preview-card {
+        background: rgba(26, 31, 58, 0.6);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(59, 130, 246, 0.2);
+        border-radius: 20px;
+        padding: 30px;
+        height: fit-content;
+        position: sticky;
+        top: 20px;
+    }
+
+    .preview-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+    }
+
+    .preview-icon {
+        width: 24px;
+        height: 24px;
+        color: #3b82f6;
+    }
+
+    .preview-header h3 {
+        color: white;
+        font-size: 1.3rem;
+        margin: 0;
+    }
+
+    .preview-content {
+        background: rgba(10, 14, 39, 0.4);
+        border-radius: 12px;
+        padding: 30px;
+    }
+
+    .preview-social {
+        text-align: center;
+    }
+
+    .preview-icon-wrapper {
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+        border-radius: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+    }
+
+    .preview-icon-display {
+        font-size: 3rem;
+        color: white;
+    }
+
+    .preview-name {
+        color: white;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0 0 15px 0;
+    }
+
+    .preview-url {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(10, 14, 39, 0.6);
+        padding: 10px 20px;
+        border-radius: 10px;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+        border-left: 3px solid #3b82f6;
+    }
+
+    .url-icon {
+        width: 16px;
+        height: 16px;
+        color: #3b82f6;
+    }
+
+    @@media (max-width: 1200px) {
+        .ai-form-container {
+            grid-template-columns: 1fr;
+        }
+
+        .ai-preview-card {
+            position: relative;
+            top: 0;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .ai-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .ai-header-content {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .ai-title {
+            font-size: 2rem;
+        }
+
+        .ai-form {
+            padding: 25px;
+        }
+
+        .ai-form-actions {
+            flex-direction: column;
+        }
+
+        .icon-selector {
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const nameInput = document.querySelector('input[name="Name"]');
+        const iconInput = document.getElementById('iconInput');
+        const urlInput = document.querySelector('input[name="Url"]');
+        
+        const previewName = document.getElementById('previewName');
+        const previewIcon = document.getElementById('previewIcon');
+        const previewUrl = document.getElementById('previewUrl');
+        
+        const iconOptions = document.querySelectorAll('.icon-option');
+
+        function updatePreview() {
+            previewName.textContent = nameInput.value || 'Platform Adı';
+            previewUrl.textContent = urlInput.value || 'URL burada görünecek';
+            
+            if (iconInput.value) {
+                previewIcon.className = iconInput.value + ' preview-icon-display';
+            } else {
+                previewIcon.className = 'fab fa-globe preview-icon-display';
+            }
+        }
+
+        // Set active icon on page load
+        const currentIcon = iconInput.value;
+        iconOptions.forEach(option => {
+            if (option.getAttribute('data-icon') === currentIcon) {
+                option.classList.add('active');
+            }
+        });
+
+        nameInput.addEventListener('input', updatePreview);
+        iconInput.addEventListener('input', updatePreview);
+        urlInput.addEventListener('input', updatePreview);
+
+        iconOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                iconOptions.forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+                
+                const iconClass = this.getAttribute('data-icon');
+                iconInput.value = iconClass;
+                updatePreview();
+            });
+        });
+
+        // Initialize preview with existing values
+        updatePreview();
+    });
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 

@@ -1,5 +1,6 @@
 ﻿using AITech.Business.Services.CategoryServices;
 using AITech.DTO.CategoryDtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AITech.API.Controllers
@@ -23,6 +24,7 @@ namespace AITech.API.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(CreateCategoryDto dto)
         {
             await _categoryService.TCreateAsync(dto);

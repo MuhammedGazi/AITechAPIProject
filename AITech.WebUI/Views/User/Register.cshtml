@@ -1,0 +1,90 @@
+﻿@using AITech.WebUI.DTO.UserDtos
+@model CreateUserDto
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <title>Pluto - Kayıt Ol</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="~/AdminPluto-1.0.0/images/fevicon.png" type="image/png" />
+    <link rel="stylesheet" href="~/AdminPluto-1.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/AdminPluto-1.0.0/style.css" />
+    <link rel="stylesheet" href="~/AdminPluto-1.0.0/css/responsive.css" />
+    <link rel="stylesheet" href="~/AdminPluto-1.0.0/css/colors.css" />
+    <link rel="stylesheet" href="~/AdminPluto-1.0.0/css/bootstrap-select.css" />
+    <link rel="stylesheet" href="~/AdminPluto-1.0.0/css/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="~/AdminPluto-1.0.0/css/custom.css" />
+    <link rel="stylesheet" href="~/AdminPluto-1.0.0/js/semantic.min.css" />
+</head>
+<body class="inner_page login">
+    <div class="full_container">
+        <div class="container">
+            <div class="center verticle_center full_height">
+                <div class="login_section">
+                    <div class="logo_login">
+                        <div class="center">
+                            <img width="210" src="~/AdminPluto-1.0.0/images/logo/logo.png" alt="#" />
+                        </div>
+                    </div>
+                    <div class="login_form">
+                        <form asp-action="Register" asp-controller="User" method="post">
+                            <fieldset>
+
+                                <div class="field">
+                                    <label class="label_field">Ad Soyad</label>
+                                    <input type="text" name="FullName" placeholder="Adınız Soyadınız" required />
+                                </div>
+
+                                <div class="field">
+                                    <label class="label_field">E-Mail</label>
+                                    <input type="email" name="Email" placeholder="E-mail Adresiniz" required />
+                                </div>
+
+                                <div class="field">
+                                    <label class="label_field">Şifre</label>
+                                    <input type="password" name="Password" placeholder="Şifreniz" required />
+                                </div>
+
+                                <div class="field">
+                                    <label class="label_field">Şifre (T)</label>
+                                    <input type="password" name="ConfirmPassword" placeholder="Şifrenizi Tekrar Girin" required />
+                                </div>
+
+                                <div class="field">
+                                    <label class="form-check-label"><input type="checkbox" class="form-check-input"> Kuralları Kabul Ediyorum</label>
+                                    <a class="forgot" href="/Auth/Login">Zaten hesabın var mı? Giriş Yap</a>
+                                </div>
+
+                                <div class="field margin_0">
+                                    <label class="label_field hidden">hidden label</label>
+                                    <button class="main_bt">Kayıt Ol</button>
+                                </div>
+
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/AdminPluto-1.0.0/js/jquery.min.js"></script>
+    <script src="~/AdminPluto-1.0.0/js/popper.min.js"></script>
+    <script src="~/AdminPluto-1.0.0/js/bootstrap.min.js"></script>
+    <script src="~/AdminPluto-1.0.0/js/animate.js"></script>
+    <script src="~/AdminPluto-1.0.0/js/bootstrap-select.js"></script>
+    <script src="~/AdminPluto-1.0.0/js/perfect-scrollbar.min.js"></script>
+    <script>
+        var ps = new PerfectScrollbar('#sidebar');
+    </script>
+    <script src="~/AdminPluto-1.0.0/js/custom.js"></script>
+</body>
+</html>
