@@ -36,13 +36,6 @@ Proje hem **API** servislerini hem de **MVC UI** arayüzünü tek bir çatı alt
 ## 🏗️ Mimari Yapı & Klasör Düzeni
 
 Proje, gevşek bağlı (loosely coupled) bir yapı için **N-Katmanlı Mimari (N-Tier)** kullanılarak tasarlanmıştır.
-
-```mermaid
-graph TD;
-    Core[Core Layer] --> Data[Data Layer];
-    Data --> Service[Service Layer];
-    Service --> API[API Presentation];
-    Service --> MVC[MVC Web UI];
 📂 Core Layer: Varlıklar (Entities), DTOs (Records), Interface'ler.
 📂 Data Layer: EF Core konfigürasyonları, Repository Pattern, UnitOfWork.
 📂 Service Layer: İş mantığı (Business Logic), Validasyonlar, Mapping.
