@@ -48,22 +48,45 @@ Proje, sürdürülebilirlik ve performans odaklı aşağıdaki teknolojiler ve d
 Klasörleme mantığı, SOLID prensiplerine hizmet edecek şekilde düzenlenmiştir:
 
 ```text
-Solution
-├── 📂 Core
-│   ├── Entities (Base Entity, IEntity)
-│   ├── DTOs (Record types)
-│   └── Interfaces
-├── 📂 Data
-│   ├── Contexts (DbContext, Interceptors)
-│   ├── Repositories (Generic & Specific)
-│   └── UnitOfWork
-├── 📂 Service
-│   ├── Services (Business Logic)
-│   ├── Mappings (AutoMapper)
-│   └── Validations
-├── 📂 WebAPI
-│   └── Controllers (RESTful Endpoints)
-└── 📂 WebUI (MVC)
-    ├── Areas (Admin Panel)
-    ├── ViewComponents
-    └── Integrations (Gemini AI Service)
+AITech.Solution
+│   ├── 📂 AITech.Entity
+│   │   ├── 📂 Common (BaseEntity, IEntity, IAuditEntity)
+│   │   └── 📂 Concrete (Product, Category, User vb.)
+│   │
+│   └── 📂 AITech.DTO
+│       └── 📂 DTOS (Immutable Record Tipleri)
+│           ├── ProductDto.cs
+│           └── UserDto.cs
+│
+│   ├── 📂 AITech.DataAccess (EF Core & Repositories)
+│   │   ├── 📂 Contexts (AppDbContext)
+│   │   ├── 📂 Interceptors (AuditDbContextInterceptor.cs) 👈 Created/Updated Tarihleri
+│   │   ├── 📂 Configurations (Fluent API ayarları)
+│   │   ├── 📂 Migrations
+│   │   ├── 📂 Repositories (Generic & Concrete Repositories)
+│   │   └── 📂 UnitOfWork (API için transaction yönetimi)
+│   │
+│   └── 📂 AITech.Integrations (Dış Servisler)
+│       └── 📂 GeminiAI (Gemini Entegrasyon kodları)
+│
+│   └── 📂 AITech.Business
+│       ├── 📂 Abstract (IService Interface'leri)
+│       ├── 📂 Concrete (Service Manager'ları)
+│       ├── 📂 Mappings (AutoMapper Profilleri)
+│       ├── 📂 Validations (FluentValidation Kuralları)
+│       └── 📂 DependencyResolvers (Scrutor Extensions) 👈 Otomatik DI tarama
+│
+│   ├── 📂 AITech.API (Restful Servis)
+│   │   ├── 📂 Controllers
+│   │   ├── 📂 Filters
+│   │   └── 📂 Middleware (Global Exception Handling)
+│   │
+│   └── 📂 AITech.WebUI (MVC Arayüz)
+│       ├── 📂 Areas
+│       │   └── 📂 Admin 👈 Admin Paneli buraya
+│       │       ├── Controllers
+│       │       └── Views
+│       ├── 📂 ViewComponents 👈 Widgetlar buraya
+│       ├── 📂 Views
+│       ├── 📂 wwwroot
+│       └── Program.cs
