@@ -1,5 +1,4 @@
-﻿
-@*
+﻿@*
     _AdminNavbarComponent
 *@
 <nav id="sidebar">
@@ -14,7 +13,7 @@
             <div class="user_profle_side">
                 <div class="user_img"><img class="img-responsive" src="~/AdminPluto-1.0.0/images/layout_img/user_img.jpg" alt="#" /></div>
                 <div class="user_info">
-                    <h6>John David</h6>
+                    <h6>Admin</h6>
                     <p><span class="online_animation"></span> Online</p>
                 </div>
             </div>
@@ -23,15 +22,63 @@
     <div class="sidebar_blog_2">
         <h4>General</h4>
         <ul class="list-unstyled components">
-            <li class="active">
-                <a href="#dashboard" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-dashboard yellow_color"></i> <span>Dashboard</span></a>
-                <ul class="collapse list-unstyled" id="dashboard">
-                    <li><a href="dashboard.html">> <span>Default Dashboard</span></a></li>
-                    <li><a href="dashboard_2.html">> <span>Dashboard style 2</span></a></li>
-                </ul>
+            <li>
+                <a href="/Admin/About/Index">
+                    <i class="fa fa-info-circle orange_color"></i> <span>Hakkımızda</span>
+                </a>
             </li>
-            <li><a href="widgets.html"><i class="fa fa-clock-o orange_color"></i> <span>Widgets</span></a></li>
-            <li><a href="settings.html"><i class="fa fa-cog yellow_color"></i> <span>Settings</span></a></li>
+
+            <li>
+                <a href="/Admin/AboutItem/Index">
+                    <i class="fa fa-list-alt yellow_color"></i> <span>Hakkımızda İtemler</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/Admin/Choose/Index">
+                    <i class="fa fa-check-square-o green_color"></i> <span>Neden Biz</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/Admin/FAQ/Index">
+                    <i class="fa fa-question-circle purple_color"></i> <span>FAQ Alanı</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/Admin/Feature/Index">
+                    <i class="fa fa-star yellow_color"></i> <span>Özellikler</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/Admin/Social/Index">
+                    <i class="fa fa-share-alt blue_color"></i> <span>Sosyal Medya</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/Admin/Testimonial/Index">
+                    <i class="fa fa-quote-left red_color"></i> <span>Yorumlar</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/Project/Index">
+                    <i class="fa fa-briefcase orange_color"></i> <span>Projeler</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Admin/Banner/Index">
+                    <i class="fa fa-picture-o red_color"></i> <span>Banner</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/Admin/Category/Index">
+                    <i class="fa fa-tags blue_color"></i> <span>Kategoriler</span>
+                </a>
+            </li>
         </ul>
     </div>
 </nav>

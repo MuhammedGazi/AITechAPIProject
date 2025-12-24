@@ -18,6 +18,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 
 
+//builder.Services.AddControllers(options =>
+//{
+//    options.Filters.Add<AllowGetRequestsFilter>();
+//});
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

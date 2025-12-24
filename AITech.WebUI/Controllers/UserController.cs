@@ -1,7 +1,6 @@
 ﻿using AITech.WebUI.DTO.UserDtos;
 using AITech.WebUI.Services.UserServices;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace AITech.WebUI.Controllers
 {
@@ -26,7 +25,7 @@ namespace AITech.WebUI.Controllers
         public async Task<IActionResult> Login(LoginUserDto dto)
         {
             await _service.LoginAsync(dto);
-            return RedirectToAction("Index","Default");
+            return RedirectToAction("Index", "About", new { area = "Admin" });
         }
     }
 }
